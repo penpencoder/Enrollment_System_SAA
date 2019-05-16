@@ -72,6 +72,9 @@
                         <li class="nav-item">
                             <h6><a class="nav-link" href="confirm_account.php"><i class="far fa-user"></i> Confirm Acc</a></h6>
                         </li>
+                        <li class="nav-item">
+                            <h6><a class="nav-link" href="admin_lock_grades.php"><i class="fas fa-lock"></i> Lock Grades</a></h6>
+                        </li>
                     </ul>
                 </div>
             </div>

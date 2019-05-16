@@ -45,11 +45,23 @@
             </div>
         </div>
         <div class="card-body">
+            <!-- <div class="alert alert-warning" role="alert">
+                Announcement: 
+                <?php
+                    // $announce = mysqli_query($con, "SELECT * FROM `announcement` ORDER BY `date` DESC LIMIT 1");
 
+                    // if (mysqli_num_rows($announce) > 0) {
+                    //     // output data of each row
+                    //     while($row = mysqli_fetch_assoc($announce)) {
+                    //         echo ($row['announcement']. "</br>");
+                    //     }
+                    // }
+                ?>
+            </div> -->
             <?php
                 $message = '';
                 if($vince >= 1) {
-                    $disp_stud = mysqli_query($con, "select grade.first_grading, grade.second_grading, grade.third_grading, grade.fourth_grading, grade.lock, grade.student_id, student.lrn, student.family_name, student.first_name, student.grade_level_id, subject.subject_id, subject.grade_level from grade inner join student on student.lrn = grade.student_id inner join subject on subject.grade_level = student.grade_level_id where subject.subject_id = '$vince'");
+                    $disp_stud = mysqli_query($con, "select grade.first_grading, grade.first_grading_lock, grade.second_grading, grade.second_grading_lock, grade.third_grading, grade.third_grading_lock, grade.fourth_grading, grade.fourth_grading_lock, grade.lock, grade.student_id, student.lrn, student.family_name, student.first_name, student.grade_level_id, subject.subject_id, subject.grade_level from grade inner join student on student.lrn = grade.student_id inner join subject on subject.grade_level = student.grade_level_id where subject.subject_id = '$vince'");
                             
                     $_SESSION['idx'] = 1;
                     $a = 0;
@@ -76,7 +88,7 @@
                                 <td><?php echo $row['first_name']; ?> <?php echo $row['family_name']; ?></td>
                                 <td>
                                     <?php
-                                        if($row['first_grading'] === '') {
+                                        if($row['first_grading_lock'] === '0') {
                                     ?>
                                         <div class="col-auto" style="width: 80%;">
                                             <label class="sr-only" for="inlineFormInputGroup">1st</label>
@@ -84,12 +96,12 @@
                                                 <div class="input-group-prepend">
                                                 <div class="input-group-text">1st</div>
                                                 </div>
-                                                <input type="number" name="first_grading<?php echo $a;?>" class="form-control" id="inlineFormInputGroup" placeholder="Grade">
+                                                <input type="number" name="first_grading<?php echo $a;?>" class="form-control" id="inlineFormInputGroup" value="<?php echo $row['first_grading'] ?>">
                                             </div>
                                         </div>
                                     <?php    
                                         }
-                                        else {
+                                        else if($row['first_grading_lock'] === '1'){
                                     ?>
                                         <input class="form-control w-50 bg-light" type="text" value="<?php echo $row['first_grading'] ?>" name="first_grading<?php echo $a;?>" readonly>
                                     <?php
@@ -99,7 +111,7 @@
                                 
                                 <td>
                                     <?php
-                                        if($row['second_grading'] === '') {
+                                        if($row['second_grading_lock'] === '0') {
                                     ?>
                                         <div class="col-auto" style="width: 80%;">
                                             <label class="sr-only" for="inlineFormInputGroup">2nd</label>
@@ -107,12 +119,12 @@
                                                 <div class="input-group-prepend">
                                                 <div class="input-group-text">2nd</div>
                                                 </div>
-                                                <input type="number" name="second_grading<?php echo $a;?>" class="form-control" id="inlineFormInputGroup" placeholder="Grade">
+                                                <input type="number" name="second_grading<?php echo $a;?>" class="form-control" id="inlineFormInputGroup" value="<?php echo $row['second_grading'] ?>">
                                             </div>
                                         </div>
                                     <?php    
                                         }
-                                        else {
+                                        else if($row['second_grading_lock'] === '1'){
                                     ?>
                                         <input class="form-control w-50 bg-light" type="text" value="<?php echo $row['second_grading'] ?>" name="second_grading<?php echo $a;?>" readonly>
                                     <?php
@@ -122,7 +134,7 @@
                                 
                                 <td>
                                     <?php
-                                        if($row['third_grading'] === '') {
+                                        if($row['third_grading_lock'] === '0') {
                                     ?>
                                         <div class="col-auto" style="width: 80%;">
                                             <label class="sr-only" for="inlineFormInputGroup">3rd</label>
@@ -130,12 +142,12 @@
                                                 <div class="input-group-prepend">
                                                 <div class="input-group-text">3rd</div>
                                                 </div>
-                                                <input type="number" name="third_grading<?php echo $a;?>" class="form-control" id="inlineFormInputGroup" placeholder="Grade">
+                                                <input type="number" name="third_grading<?php echo $a;?>" class="form-control" id="inlineFormInputGroup" value="<?php echo $row['third_grading'] ?>">
                                             </div>
                                         </div>
                                     <?php    
                                         }
-                                        else {
+                                        else if($row['third_grading_lock'] === '1'){
                                     ?>
                                         <input class="form-control w-50 bg-light" type="text" value="<?php echo $row['third_grading'] ?>" name="third_grading<?php echo $a;?>" readonly>
                                     <?php
@@ -145,7 +157,7 @@
                                 
                                 <td>
                                     <?php
-                                        if($row['fourth_grading'] === '') {
+                                        if($row['fourth_grading_lock'] === '0') {
                                     ?>
                                         <div class="col-auto" style="width: 80%;">
                                             <label class="sr-only" for="inlineFormInputGroup">4th</label>
@@ -153,12 +165,12 @@
                                                 <div class="input-group-prepend">
                                                 <div class="input-group-text">4th</div>
                                                 </div>
-                                                <input type="number" name="fourth_grading<?php echo $a;?>" class="form-control" id="inlineFormInputGroup" placeholder="Grade">
+                                                <input type="number" name="fourth_grading<?php echo $a;?>" class="form-control" id="inlineFormInputGroup" value="<?php echo $row['fourth_grading'] ?>">
                                             </div>
                                         </div>
                                     <?php    
                                         }
-                                        else {
+                                        else if($row['fourth_grading_lock'] === '1'){
                                     ?>
                                         <input class="form-control w-50 bg-light" type="text" value="<?php echo $row['fourth_grading'] ?>" name="fourth_grading<?php echo $a;?>" readonly>
                                     <?php
@@ -188,7 +200,7 @@
                 }//detoy tay end jay if   
                 else {
                     if($vince < 1) {
-                        $message = 'PLese choose a subject';
+                        $message = 'Please choose a subject';
                     }
                 }// dety tay end jay else ti if
             ?>

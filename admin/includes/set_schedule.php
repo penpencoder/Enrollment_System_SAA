@@ -14,19 +14,8 @@
 					$subject = $_POST['subject'];
 					$time = $_POST['time'];
 					$schoolyear = $_POST['schoolyear'];
-
-					$query = mysqli_query($con, "select subject_id, grade_level from subject where subject_id = $subject"); 
-					while($q_row = mysqli_fetch_array($query)) {
-						$level = $q_row['grade_level'];
-
-						$query2 = mysqli_query($con, "select lrn, grade_level_id, from student where grade_level_id = '$level'");
-						$co = mysqli_num_rows($query2);
-						while($q2_row = mysqli_fetch_array($query2)) {
-						
-						}
-					}
 					
-					/*$sql = "INSERT INTO `schedule`(`faculty_id`, `subject_id`, `time_id`, `school_year_id`) 
+					$sql = "INSERT INTO `schedule`(`faculty_id`, `subject_id`, `time_id`, `school_year_id`) 
 							VALUES ('$faculty','$subject','$time','$schoolyear')";
 				
 					if($con->query($sql) === TRUE) {
@@ -34,7 +23,7 @@
 					}
 					else{
 						echo $con->error;
-					}*/
+					}
 				}
 				
 			?>

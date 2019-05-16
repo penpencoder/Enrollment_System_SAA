@@ -63,7 +63,7 @@
                     }
                     else {
             ?>
-                <form action="lock_clearance.php" method="post">
+                <form action="clearance.php" method="post">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -80,7 +80,7 @@
                             <tr>
                                 <td><?php echo $row['lrn'] ?></td>
                                 <td><?php echo $row['first_name']; ?> <?php echo $row['family_name']; ?></td>
-                                <td><input type="checkbox" name="check<?php echo $a;?>" value="check"></td>
+                                <td><input type="checkbox" name="check<?php echo $a;?>" value="check" id="LetterNeed" onclick="validate()"></td>
                                 <td>
                                     <input type="hidden" name="lrn<?php echo $a?>" value="<?php echo $row['lrn'] ?>">
                                     <input type="hidden" name="a" value="<?php echo $a ?>" >
@@ -94,18 +94,31 @@
                                 <td colspan="5">
                                     <input type="hidden" name="sub_id" value="<?php echo $vince ?>">
                                     <input type="hidden" name="teacher_id" value="<?php echo $teacher ?>">
-                                    <button name="add_grade" type="submit" class="btn btn-info w-100 float-right">Save</button>
+                                    <button onclick="saveClick()" class="btn btn-info w-100 float-right">Save</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
+                <script>
+                    // function validate() {
+                    //     if (document.getElementById('LetterNeed').checked) {
+                    //         alert("Clearance Checked");
+                    //     } else {
+                    //         alert("Clearance Not yet Approved");
+                    //     }
+                    // }
+
+                    function saveClick(){
+                        alert("Clearance Saved");
+                    }
+                </script>
             <?php
                     }
                 }//detoy tay end jay if   
                 else {
                     if($vince < 1) {
-                        $message = 'PLese choose a subject';
+                        $message = 'Please choose a subject';
                     }
                 }// dety tay end jay else ti if
             ?>
